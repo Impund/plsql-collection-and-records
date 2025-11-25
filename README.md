@@ -1,3 +1,7 @@
+Names: IMPUNDU GATERA Brazia
+ID: 29057
+Group: D
+
 E-Waste Collection & Processing – PL/SQL Problem
 
 This small demonstration shows how to use PL/SQL Collections, Records, and GOTO statements through a simple scenario of handling electronic waste items.
