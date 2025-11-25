@@ -1,0 +1,86 @@
+Explanation Notes
+Why VARRAY?
+
+In an e-waste center, some things come in fixed small sets — for example, the standard weight categories the center uses (Light, Medium, Heavy).
+A VARRAY is perfect for this because it holds a fixed number of elements that don’t change often.
+
+Example code (for documentation):
+
+TYPE weight_category_varray IS VARRAY(3) OF VARCHAR2(20);
+weight_categories weight_category_varray := weight_category_varray('Light', 'Medium', 'Heavy');
+
+Why Nested Table?
+
+The number of items received each day changes a lot.
+Sometimes the center receives 3 items, sometimes 50.
+This makes a Nested Table a good choice because it grows or shrinks depending on the number of items.
+
+Example code (for documentation):
+
+TYPE weight_list IS TABLE OF NUMBER;
+daily_weights weight_list := weight_list();
+
+Why Records?
+
+Each e-waste item has multiple attributes:
+
+item_id
+
+name
+
+category
+
+weight
+
+Instead of creating many separate variables, a Record stores everything in one structured form.
+
+Example code:
+
+TYPE item_rec IS RECORD(
+  item_id   NUMBER,
+  name      VARCHAR2(100),
+  category  VARCHAR2(50),
+  weight    NUMBER
+);
+
+Why Associative Array?
+
+An e-waste center can collect many items.
+An Associative Array lets us store an unlimited number of items and access them easily by index (1, 2, 3…).
+
+Example code:
+
+TYPE item_table IS TABLE OF item_rec INDEX BY PLS_INTEGER;
+items item_table;
+
+Why GOTO?
+
+Sometimes an item is invalid — missing weight, missing category, or labeled “INVALID.”
+To demonstrate PL/SQL flow control, the project uses a GOTO statement to skip invalid items and continue processing the rest.
+
+Real systems avoid GOTO, but it is used here because the assignment requires it.
+
+Example code:
+
+IF r.status = 'INVALID' OR r.category IS NULL OR r.weight IS NULL THEN
+  GOTO skip_item;
+END IF;
+
+<<skip_item>>
+NULL;
+
+Why This Topic?
+
+E-waste is a real problem in Africa and the world today.
+People are throwing away phones, batteries, and computers without knowing where they end up.
+This topic is:
+
+modern
+
+practical
+
+easy to understand
+
+connected to environmental protection
+
+perfect for demonstrating PL/SQL data handling
